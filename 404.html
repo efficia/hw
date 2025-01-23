@@ -8,21 +8,27 @@
     <!-- Start Single Page Apps for GitHub Pages -->
     <script type="text/javascript">
       (function () {
-        const currentPath = window.location.pathname;
-        const basePath = "/hw"; // Update this if your base path changes.
+        const location = window.location;
+        const basePath = "/hw"; // Base path of your app.
 
-        if (!currentPath.startsWith(basePath)) {
-          // Not under the base path, do nothing
-          return;
+        // Check if the current path is not already the base path
+        if (
+          !location.pathname.startsWith(basePath) ||
+          location.pathname === `${basePath}/index.html`
+        ) {
+          return; // No rewrite needed for root paths or `index.html`.
         }
 
-        // Strip the basePath and direct to index.html with the remaining path as a query parameter
-        const newUrl = `${basePath}/index.html?${currentPath.slice(
-          basePath.length
-        )}${window.location.search}${window.location.hash}`;
+        // Rewrite any other path to the base path, appending the original path as a query string
+        const pathWithoutBase = location.pathname.slice(basePath.length);
+        const newUrl = `${basePath}/index.html?${pathWithoutBase}${location.search}${location.hash}`;
+
+        // Redirect to the new URL
+        console.log(`Redirecting to: ${newUrl}`);
         window.location.replace(newUrl);
       })();
     </script>
+
     <!-- End Single Page Apps for GitHub Pages -->
   </head>
   <body>
