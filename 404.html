@@ -9,23 +9,20 @@
     <script type="text/javascript">
       (function () {
         const location = window.location;
-        const basePath = "/hw"; // Base path of your app.
+        const basePath = "/hw"; // GitHub Pages base path of your app.
 
-        // Check if the current path is not already the base path
-        if (
-          !location.pathname.startsWith(basePath) ||
-          location.pathname === `${basePath}/index.html`
-        ) {
-          return; // No rewrite needed for root paths or `index.html`.
+        // If the current path starts with the basePath but isn't at the root
+        if (location.pathname.startsWith(basePath)) {
+          // Remove the basePath from the pathname
+          const relativePath = location.pathname.slice(basePath.length);
+
+          // If the relative path isn't root ("/"), redirect to the base path
+          if (relativePath !== "/") {
+            const newUrl = `${basePath}/`;
+            console.log(`Redirecting to: ${newUrl}`);
+            window.location.replace(newUrl);
+          }
         }
-
-        // Rewrite any other path to the base path, appending the original path as a query string
-        const pathWithoutBase = location.pathname.slice(basePath.length);
-        const newUrl = `${basePath}/index.html?${pathWithoutBase}${location.search}${location.hash}`;
-
-        // Redirect to the new URL
-        console.log(`Redirecting to: ${newUrl}`);
-        window.location.replace(newUrl);
       })();
     </script>
 
