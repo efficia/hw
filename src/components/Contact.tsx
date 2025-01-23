@@ -1,12 +1,11 @@
-import React from 'react';
-import { Phone, Mail, Building2, User, Download } from 'lucide-react';
-import { QRCodeSVG } from 'qrcode.react';
-import { useSearchParams } from 'react-router-dom';
-import { contacts } from '../data/contacts';
+import { Phone, Mail, Building2, User, Download } from "lucide-react";
+import { QRCodeSVG } from "qrcode.react";
+import { useSearchParams } from "react-router-dom";
+import { contacts } from "../data/contacts";
 
 const Contact = () => {
   const [searchParams] = useSearchParams();
-  const profileId = searchParams.get('profile') || 'default';
+  const profileId = searchParams.get("profile") || "default";
   const contactInfo = contacts[profileId] || contacts.default;
 
   // Generate vCard content
@@ -20,7 +19,9 @@ EMAIL;type=INTERNET;type=WORK:${contactInfo.email}
 TEL;type=CELL:${contactInfo.mobile}
 END:VCARD`;
 
-  const vCardUrl = `data:text/vcard;charset=utf-8,${encodeURIComponent(vCardContent)}`;
+  const vCardUrl = `data:text/vcard;charset=utf-8,${encodeURIComponent(
+    vCardContent
+  )}`;
 
   return (
     <div className="min-h-screen pt-20 bg-gradient-to-br from-blue-50 to-blue-100">
@@ -34,7 +35,9 @@ END:VCARD`;
                   <div className="inline-block p-4 rounded-full bg-white/10 mb-4">
                     <User className="w-12 h-12" />
                   </div>
-                  <h1 className="text-3xl font-bold mb-2">{contactInfo.fullName}</h1>
+                  <h1 className="text-3xl font-bold mb-2">
+                    {contactInfo.fullName}
+                  </h1>
                   <p className="text-blue-100">{contactInfo.designation}</p>
                 </div>
 
@@ -55,7 +58,10 @@ END:VCARD`;
                     </div>
                     <div>
                       <p className="text-sm text-gray-500">Mobile</p>
-                      <a href={`tel:${contactInfo.mobile}`} className="font-medium hover:text-blue-600">
+                      <a
+                        href={`tel:${contactInfo.mobile}`}
+                        className="font-medium hover:text-blue-600"
+                      >
                         {contactInfo.mobile}
                       </a>
                     </div>
@@ -67,7 +73,10 @@ END:VCARD`;
                     </div>
                     <div>
                       <p className="text-sm text-gray-500">Email</p>
-                      <a href={`mailto:${contactInfo.email}`} className="font-medium hover:text-blue-600">
+                      <a
+                        href={`mailto:${contactInfo.email}`}
+                        className="font-medium hover:text-blue-600"
+                      >
                         {contactInfo.email}
                       </a>
                     </div>
@@ -89,10 +98,14 @@ END:VCARD`;
               {/* QR Code Section */}
               <div className="hidden md:flex md:w-80 bg-gray-50 flex-col items-center justify-center p-8 border-l border-gray-100">
                 <div className="text-center mb-6">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Scan to Add Contact</h3>
-                  <p className="text-sm text-gray-600">Use your phone's camera to scan and save contact</p>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                    Scan to Add Contact
+                  </h3>
+                  <p className="text-sm text-gray-600">
+                    Use your phone's camera to scan and save contact
+                  </p>
                 </div>
-                
+
                 <div className="bg-white p-4 rounded-xl shadow-md">
                   <QRCodeSVG
                     value={vCardContent}
