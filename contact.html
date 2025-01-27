@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Save Contact</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f8ff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .container {
+        text-align: center;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        color: white;
+        background-color: #0078d7;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #005bb5;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Save Contact</h1>
+      <p>Click the button below to save the contact information.</p>
+      <button id="save-contact">Save Contact</button>
+    </div>
+
+    <script>
+      document.getElementById("save-contact").addEventListener("click", () => {
+        const isMobile = /android|iphone|ipad|ipod/i.test(navigator.userAgent);
+
+        // Contact details
+        const firstName = "John";
+        const lastName = "Doe";
+        const mobile = "13035551212";
+        const email = "john.doe@example.com";
+        const company = "Example Corp";
+
+        if (isMobile) {
+          // Generate MeCARD format for mobile browsers
+          const meCardContent = `MECARD:N:${lastName},${firstName};TEL:${mobile};EMAIL:${email};ORG:${company};;`;
+          const meCardLink = `data:text/plain;charset=utf-8,${encodeURIComponent(
+            meCardContent
+          )}`;
+          window.location.href = meCardLink;
+        } else {
+          // Generate vCard content for desktops
+          const vCardContent = `BEGIN:VCARD
+VERSION:3.0
+FN:${firstName} ${lastName}
+N:${lastName};${firstName};;;
+ORG:${company}
+EMAIL:${email}
+TEL:${mobile}
+END:VCARD`;
+          const vCardBlob = new Blob([vCardContent], { type: "text/vcard" });
+          const vCardUrl = URL.createObjectURL(vCardBlob);
+
+          // Trigger file download
+          const a = document.createElement("a");
+          a.href = vCardUrl;
+          a.download = `${firstName}_${lastName}.vcf`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(vCardUrl);
+        }
+      });
+    </script>
+  </body>
+</html>
