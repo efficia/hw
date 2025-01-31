@@ -13,12 +13,12 @@ const Contact = () => {
   // Generate vCard content
   const vCardContent = `BEGIN:VCARD
 VERSION:3.0
-FN:${contactInfo.fullName}
 N:${contactInfo.lastName};${contactInfo.firstName};;;
 TITLE:${contactInfo.designation}
-ORG:${contactInfo.company}
 EMAIL;type=INTERNET;type=WORK:${contactInfo.email}
+EMAIL;type=INTERNET;type=WORK:${contactInfo.secondaryEmail}
 TEL;type=CELL:${contactInfo.mobile}
+TEL;type=WORK:${contactInfo.work}
 END:VCARD`;
 
   const vCardUrl = `data:text/vcard;charset=utf-8,${encodeURIComponent(
