@@ -59,7 +59,7 @@ END:VCARD`;
   };
 
   return (
-    <div className="min-h-screen pt-20 bg-gradient-to-br from-blue-50 to-blue-100">
+    <div className="min-h-screen pt-1 bg-gradient-to-br from-blue-50 to-blue-100">
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto">
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
