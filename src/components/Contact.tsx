@@ -9,6 +9,7 @@ const Contact = () => {
   const profileId = searchParams.get("profile") || "default";
   const contactInfo = contacts[profileId] || contacts.default;
   const downloadTriggered = useRef(false);
+  const qrRef = useRef(null);
 
   // Generate vCard content
   const vCardContent = `BEGIN:VCARD
@@ -37,6 +38,25 @@ END:VCARD`;
       downloadTriggered.current = true;
     }
   }, [vCardUrl, contactInfo.fullName]);
+
+  const downloadQRCode = () => {
+    if (!qrRef.current) return;
+
+    const svgElement = qrRef.current.querySelector("svg");
+    if (!svgElement) return;
+
+    const svgData = new XMLSerializer().serializeToString(svgElement);
+    const blob = new Blob([svgData], { type: "image/svg+xml" });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "qrcode.svg";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
 
   return (
     <div className="min-h-screen pt-20 bg-gradient-to-br from-blue-50 to-blue-100">
@@ -80,6 +100,29 @@ END:VCARD`;
                         {contactInfo.mobile}
                       </a>
                     </div>
+                    <div>
+                      <p className="text-sm text-gray-500">WhatsApp</p>
+                      <a
+                        href={`tel:${contactInfo.mobile2}`}
+                        className="font-medium hover:text-blue-600"
+                      >
+                        {contactInfo.mobile2}
+                      </a>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0">
+                      <Phone className="w-6 h-6 text-blue-600" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500">Office</p>
+                      <a
+                        href={`tel:${contactInfo.work}`}
+                        className="font-medium hover:text-blue-600"
+                      >
+                        {contactInfo.work}
+                      </a>
+                    </div>
                   </div>
 
                   <div className="flex items-center space-x-4">
@@ -93,6 +136,15 @@ END:VCARD`;
                         className="font-medium hover:text-blue-600"
                       >
                         {contactInfo.email}
+                      </a>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500">Work</p>
+                      <a
+                        href={`mailto:${contactInfo.email}`}
+                        className="font-medium hover:text-blue-600"
+                      >
+                        {contactInfo.secondaryEmail}
                       </a>
                     </div>
                   </div>
@@ -121,7 +173,7 @@ END:VCARD`;
                   </p>
                 </div>
 
-                <div className="bg-white p-4 rounded-xl shadow-md">
+                <div className="bg-white p-4 rounded-xl shadow-md" ref={qrRef}>
                   <QRCodeSVG
                     value={vCardContent}
                     size={200}
@@ -129,6 +181,15 @@ END:VCARD`;
                     includeMargin={true}
                   />
                 </div>
+
+                {/* Download QR as SVG Button */}
+                <button
+                  onClick={downloadQRCode}
+                  className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition flex items-center"
+                >
+                  <Download className="w-5 h-5 mr-2" />
+                  Download QR
+                </button>
 
                 <div className="mt-8 w-full">
                   <a
