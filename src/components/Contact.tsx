@@ -39,6 +39,7 @@ END:VCARD`;
     }
   }, [vCardUrl, contactInfo.fullName]);
 
+  // Download QR Code Option
   const downloadQRCode = () => {
     if (!qrRef.current) return;
 
