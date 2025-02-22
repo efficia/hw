@@ -21,7 +21,7 @@ export const contacts: Record<string, ContactInfo> = {
     email: "hans@presidentsoffice.lk",
     secondaryEmail: "hans@hw.lk",
     designation: "Chief Advisor to the President on Digital Economy",
-    company: "",
+    company: "HW",
     mobile: "+94777330033",
     mobile2: "+94777338833",
     work: "+94112354354",
