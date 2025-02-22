@@ -11,7 +11,7 @@ const Contact = () => {
   const downloadTriggered = useRef(false);
   const qrRef = useRef<HTMLDivElement | null>(null);
 
-  // Generate vCard content card
+  // Generate vCard content
   const vCardContent = `BEGIN:VCARD
 VERSION:3.0
 N:${contactInfo.lastName};${contactInfo.firstName};;;
