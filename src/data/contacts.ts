@@ -28,9 +28,9 @@ export const contacts: Record<string, ContactInfo> = {
   },
   coordinator: {
     id: "coordinator",
-    firstName: "John",
-    lastName: "Doe",
-    fullName: "John Doe",
+    firstName: "Dilith",
+    lastName: "Achalan",
+    fullName: "Dilith Achalan",
     email: "john.doe@hw.lk",
     secondaryEmail: "dilith.achalan@company.com",
     designation: "Project Coordinator",
