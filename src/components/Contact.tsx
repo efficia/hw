@@ -9,7 +9,7 @@ const Contact = () => {
   const profileId = searchParams.get("profile") || "default";
   const contactInfo = contacts[profileId] || contacts.default;
   const downloadTriggered = useRef(false);
-  const qrRef = useRef(null);
+  const qrRef = useRef<HTMLDivElement | null>(null);
 
   // Generate vCard content
   const vCardContent = `BEGIN:VCARD
