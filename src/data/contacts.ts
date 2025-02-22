@@ -8,20 +8,22 @@ interface ContactInfo {
   designation: string;
   company: string;
   mobile: string;
+  mobile2: string;
   work: string;
 }
 
 export const contacts: Record<string, ContactInfo> = {
   default: {
     id: "default",
-    firstName: "Hans",
+    firstName: "Dr. Hans",
     lastName: "Wijayasuriya",
-    fullName: "Hans Wijayasuriya",
+    fullName: "Dr. Hans Wijayasuriya",
     email: "hans@presidentsoffice.lk",
     secondaryEmail: "hans@hw.lk",
     designation: "Chief Advisor to the President on Digital Economy",
     company: "",
     mobile: "+94777330033",
+    mobile2: "+94777338833",
     work: "+94112354354",
   },
   coordinator: {
@@ -34,6 +36,7 @@ export const contacts: Record<string, ContactInfo> = {
     designation: "Project Coordinator",
     company: "HW",
     mobile: "+94777777777",
+    mobile2: "+94777338833",
     work: "+94777777777",
   },
 };

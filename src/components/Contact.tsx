@@ -18,6 +18,7 @@ TITLE:${contactInfo.designation}
 EMAIL;type=INTERNET;type=WORK:${contactInfo.email}
 EMAIL;type=INTERNET;type=WORK:${contactInfo.secondaryEmail}
 TEL;type=CELL:${contactInfo.mobile}
+TEL;type=CELL:${contactInfo.mobile2}
 TEL;type=WORK:${contactInfo.work}
 END:VCARD`;
 
